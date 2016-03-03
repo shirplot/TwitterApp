@@ -18,11 +18,12 @@ class User: NSObject {
     var profileImageUrl: NSURL?
     var tagline: String?
     var dictionary: NSDictionary
+    var followersCount: NSNumber?
     
     init(dictionary: NSDictionary){
         
         self.dictionary = dictionary
-        
+        followersCount = dictionary["followers_count"] as? NSNumber
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         let profilepictureURLString = dictionary["profile_image_url_https"] as? String

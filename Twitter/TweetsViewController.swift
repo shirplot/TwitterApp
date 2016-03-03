@@ -14,6 +14,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     var tweets: [Tweet]?
     var refreshControl : UIRefreshControl!
+    var reloading: ObjCBool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,18 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
     cell.tweet = tweets![indexPath.row]
     return cell
 }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let tweet = tweets![indexPath.row] as Tweet
+        let user = tweet.user
+        let vc:UINavigationController! =  self.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewNavigation") as! UINavigationController
+        let controller = vc.viewControllers[0] as! ProfileViewController
+        controller.user = user
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+       // self.navigationController?.pushViewController(vc, animated: true)
+        //itemId[1] - Item Id
+    }
 
 func refreshControlAction(refreshControl: UIRefreshControl){
     
